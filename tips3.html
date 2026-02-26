@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5498044208644459"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="metaTitle">Որտե՞ղ ներդնել գումարը - FinSmart Armenia</title>
+
+    <style>
+        :root { 
+            --gold: #d4af37; 
+            --dark: #1a1a1a; 
+            --white: #ffffff; 
+            --bg: #f4f7f6; 
+            --text: #333;
+            --soft-gold: #fffcf0;
+            --card-bg: white;
+        }
+
+        body.dark-mode {
+            --bg: #121212;
+            --text: #e0e0e0;
+            --card-bg: #1e1e1e;
+            --soft-gold: #252525;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            background: var(--bg); 
+            margin: 0; padding: 0; 
+            color: var(--text); 
+            line-height: 1.8; 
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        header { 
+            background: var(--dark); 
+            color: white; 
+            text-align: center; 
+            padding: 60px 20px; 
+            border-bottom: 5px solid var(--gold); 
+            position: relative;
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 110;
+        }
+
+        .logo-svg { height: 65px; width: auto; }
+
+        .settings-menu {
+            display: none;
+            position: absolute;
+            top: 75px;
+            left: 20px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 100;
+            width: 200px;
+            overflow: hidden;
+            border: 1px solid var(--gold);
+            line-height: 1.4;
+        }
+
+        .settings-menu.show { display: block; animation: fadeIn 0.3s ease; }
+
+        .settings-menu h4 {
+            margin: 0; padding: 10px; font-size: 11px;
+            text-transform: uppercase; color: var(--gold);
+            background: rgba(0,0,0,0.05); text-align: left;
+        }
+
+        .settings-menu button {
+            display: block; width: 100%; padding: 12px 15px;
+            color: var(--text); text-decoration: none; font-size: 14px;
+            background: none; border: none; text-align: left;
+            cursor: pointer; border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: 0.2s;
+        }
+
+        .settings-menu button:hover { background: var(--gold); color: white; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header h1 { margin: 15px 0 0; font-size: 28px; }
+        header p { margin: 5px 0 0; opacity: 0.8; }
+
+        .container { max-width: 800px; margin: 30px auto; padding: 0 20px; }
+        
+        .content-card { 
+            background: var(--card-bg); 
+            padding: 40px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+        }
+
+        .back-btn { 
+            display: inline-block; 
+            margin-bottom: 20px; 
+            color: var(--gold); 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: 0.3s;
+        }
+
+        .back-btn:hover { color: var(--dark); transform: translateX(-5px); }
+        body.dark-mode .back-btn:hover { color: white; }
+
+        h2 { 
+            color: var(--gold); margin-top: 30px; font-size: 24px; 
+            border-bottom: 2px solid var(--bg); display: inline-block; padding-bottom: 5px;
+        }
+
+        .investment-type {
+            background: var(--soft-gold);
+            border-left: 4px solid var(--gold);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 12px 12px 0;
+            color: var(--text);
+        }
+
+        .investment-type h3 { margin-top: 0; color: var(--dark); }
+        body.dark-mode .investment-type h3 { color: var(--gold); }
+
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); }
+        .modal-content { background: var(--card-bg); margin: 10% auto; padding: 35px; border-radius: 15px; max-width: 350px; text-align: center; border-top: 6px solid var(--gold); position: relative; }
+        
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; background: var(--card-bg); color: var(--text); }
+        .calc-btn { width: 100%; padding: 15px; background: var(--gold); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .calc-btn:hover { background: #b8962d; }
+
+        footer { background: var(--dark); color: white; text-align: center; padding: 30px; margin-top: 50px; }
+        footer a { color: var(--gold); text-decoration: none; }
+
+        @media (max-width: 600px) {
+            header { padding: 90px 20px 30px; }
+            .logo-container { left: 50%; transform: translateX(-50%); top: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-container" onclick="toggleLogoMenu()">
+        <svg class="logo-svg" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100%" height="100%" fill="rgb(26,26,26)"/>
+            <g transform="translate(80, 50)">
+              <rect x="0" y="55" width="16" height="30" rx="2" fill="white"/>
+              <rect x="25" y="40" width="16" height="45" rx="2" fill="white"/>
+              <rect x="50" y="20" width="16" height="65" rx="2" fill="white"/>
+              <rect x="75" y="0" width="16" height="85" rx="2" fill="white"/>
+              <path d="M -20 70 Q 30 110 95 65" stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <path d="M -10 85 Q 40 65 90 5" stroke="#d4af37" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <path d="M 82 12 L 95 0 L 100 18 Z" fill="#d4af37"/>
+            </g>
+            <text x="200" y="115" font-family="Arial, sans-serif" font-weight="bold" font-size="60" fill="white">
+              Fin<tspan fill="#d4af37">Smart</tspan>
+            </text>
+            <g transform="translate(200, 150)">
+              <line x1="0" y1="-5" x2="60" y2="-5" stroke="#999" stroke-width="2"/>
+              <text x="135" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#999" letter-spacing="5">ARMENIA</text>
+              <line x1="210" y1="-5" x2="270" y2="-5" stroke="#999" stroke-width="2"/>
+            </g>
+        </svg>
+    </div>
+
+    <div id="logoMenu" class="settings-menu">
+        <h4 data-key="menu_user">Օգտատեր</h4>
+        <button onclick="showUserData()" data-key="menu_my_data">👤 ԻՄ ՏՎՅԱԼՆԵՐԸ</button>
+        <h4 data-key="menu_lang">Լեզու / Language</h4>
+        <button onclick="changeLang('am')">🇦🇲 ARMENIAN</button>
+        <button onclick="changeLang('ru')">🇷🇺 RUSSIAN</button>
+        <button onclick="changeLang('en')">🇺🇸 ENGLISH</button>
+        <h4 data-key="menu_settings">Կարգավորումներ</h4>
+        <button onclick="toggleDarkMode()" data-key="menu_night_mode">🌙 Գիշերային ռեժիմ</button>
+    </div>
+
+    <h1 id="headerTitle">Ներդրումներ Հայաստանում</h1>
+    <p id="mainSub">Ինչպե՞ս ստիպել գումարին աշխատել ձեզ համար</p>
+</header>
+
+<div class="container">
+    <div class="content-card">
+        <a href="index.html" class="back-btn" id="backBtn">← Հետ գլխավոր էջ</a>
+        <div id="articleBody"></div>
+    </div>
+</div>
+
+<div id="regModal" class="modal">
+    <div class="modal-content">
+        <h3 data-key="reg_title">📥 Գրանցում</h3>
+        <form id="regForm">
+            <input type="text" id="userName" placeholder="Անուն" data-placeholder="reg_name_ph" required>
+            <input type="email" id="userEmail" placeholder="Էլ. հասցե" data-placeholder="reg_email_ph" required>
+            <button type="submit" class="calc-btn" data-key="btn_save">Պահպանել</button>
+        </form>
+        <button onclick="closeModal('regModal')" style="background:none; color:gray; margin-top:15px; border:none; cursor:pointer;" data-key="btn_close">Փակել</button>
+    </div>
+</div>
+
+<div id="userDataModal" class="modal">
+    <div class="modal-content">
+        <h3 data-key="my_data_title">👤 Իմ Տվյալները</h3>
+        <div id="userDataContent" style="background: rgba(0,0,0,0.05); padding:15px; border-radius:8px; margin:15px 0; text-align:left;"></div>
+        <button onclick="closeModal('userDataModal')" class="calc-btn" data-key="btn_ok">Լավ</button>
+        <div id="dynamicActionBtn"></div>
+    </div>
+</div>
+
+<footer>
+    &copy; 2026 FinSmart Armenia | <a href="privacy.html" data-key="privacy">Գաղտնիություն</a>
+</footer>
+
+<script>
+    const translations = {
+        am: {
+            headerTitle: "Ներդրումներ Հայաստանում",
+            mainSub: "Ինչպե՞ս ստիպել գումարին աշխատել ձեզ համար",
+            back: "← Հետ գլխավոր էջ",
+            menu_user: "Օգտատեր",
+            menu_my_data: "👤 ԻՄ ՏՎՅԱԼՆԵՐԸ",
+            menu_lang: "Լեզու / Language",
+            menu_settings: "Կարգավորումներ",
+            menu_night_mode: "🌙 Գիշերային ռեժիմ",
+            privacy: "Գաղտնիություն",
+            reg_title: "📥 Գրանցում",
+            reg_name_ph: "Անուն",
+            reg_email_ph: "Էլ. հասցե",
+            btn_save: "Պահպանել",
+            btn_close: "Փակել",
+            my_data_title: "👤 Իմ Տվյալները",
+            btn_ok: "Լավ",
+            btn_clear: "Ջնջել ամբողջը",
+            content: `
+                <h2>Որտե՞ղ սկսել</h2>
+                <p>Ներդրումները հարստանալու և գնաճից պաշտպանվելու լավագույն միջոցն են։ Հայաստանում սկսնակների համար կան մի քանի արդյունավետ տարբերակներ․</p>
+                
+                <div class="investment-type">
+                    <h3>1. Պետական պարտատոմսեր (Գանձապետական)</h3>
+                    <p>Սա համարվում է ամենաանվտանգ ներդրումը: Դուք գումար եք տալիս պետությանը և ստանում հաստատուն եկամուտ: Եկամտահարկը 0% է:</p>
+                </div>
+                
+                <div class="investment-type">
+                    <h3>2. Բանկային Ավանդներ</h3>
+                    <p>Ամենապարզ և հասկանալի գործիքը։ Այսօր հայաստանյան բանկերն առաջարկում են բավականին մրցունակ տոկոսադրույքներ դրամային ավանդների համար։</p>
+                </div>
+
+                <div class="investment-type">
+                    <h3>3. Բաժնետոմսեր և Կորպորատիվ պարտատոմսեր</h3>
+                    <p>Հայաստանի ֆոնդային բորսայում կարող եք գտնել տեղական առաջատար ընկերությունների արժեթղթեր, որոնք ապահովում են ավելի բարձր եկամտաբերություն:</p>
+                </div>
+            `
+        },
+        ru: {
+            headerTitle: "Инвестиции в Армении",
+            mainSub: "Как заставить деньги работать на вас",
+            back: "← На главную",
+            menu_user: "Пользователь",
+            menu_my_data: "👤 МОИ ДАННЫЕ",
+            menu_lang: "Язык",
+            menu_settings: "Настройки",
+            menu_night_mode: "🌙 Ночной режим",
+            privacy: "Конфиденциальность",
+            reg_title: "📥 Регистрация",
+            reg_name_ph: "Имя",
+            reg_email_ph: "Эл. почта",
+            btn_save: "Сохранить",
+            btn_close: "Закрыть",
+            my_data_title: "👤 Мои данные",
+            btn_ok: "Ок",
+            btn_clear: "Удалить всё",
+            content: `
+                <h2>С чего начать?</h2>
+                <p>Инвестиции — это ключ к финансовой независимости и защите от инфляции. В Армении доступны следующие инструменты для начинающих:</p>
+                
+                <div class="investment-type">
+                    <h3>1. Государственные облигации</h3>
+                    <p>Самый надежный вариант. Вы даете деньги в долг государству под фиксированный процент. Доход не облагается налогом.</p>
+                </div>
+
+                <div class="investment-type">
+                    <h3>2. Банковские вклады</h3>
+                    <p>Самый простой инструмент. Армянские банки предлагают высокие процентные ставки по вкладам в драмах.</p>
+                </div>
+
+                <div class="investment-type">
+                    <h3>3. Акции и корпоративные облигации</h3>
+                    <p>Инвестируйте в крупные местные компании через фондовую биржу Армении для получения более высокой прибыли.</p>
+                </div>
+            `
+        },
+        en: {
+            headerTitle: "Investments in Armenia",
+            mainSub: "Make your money work for you",
+            back: "← Back to Home",
+            menu_user: "User",
+            menu_my_data: "👤 MY DATA",
+            menu_lang: "Language",
+            menu_settings: "Settings",
+            menu_night_mode: "🌙 Night Mode",
+            privacy: "Privacy",
+            reg_title: "📥 Registration",
+            reg_name_ph: "Name",
+            reg_email_ph: "Email",
+            btn_save: "Save",
+            btn_close: "Close",
+            my_data_title: "👤 My Data",
+            btn_ok: "OK",
+            btn_clear: "Clear All",
+            content: `
+                <h2>Where to start?</h2>
+                <p>Investing is a prerequisite for building wealth and protecting against inflation. Here are some accessible options in Armenia:</p>
+                
+                <div class="investment-type">
+                    <h3>1. Government Bonds (Treasury)</h3>
+                    <p>The safest investment option. You lend money to the state and receive a fixed return. The income is tax-free.</p>
+                </div>
+
+                <div class="investment-type">
+                    <h3>2. Bank Deposits</h3>
+                    <p>The simplest tool. Currently, Armenian banks offer competitive interest rates for AMD-denominated deposits.</p>
+                </div>
+
+                <div class="investment-type">
+                    <h3>3. Stocks and Corporate Bonds</h3>
+                    <p>Explore the Armenia Securities Exchange to invest in local leading companies and potentially earn higher yields.</p>
+                </div>
+            `
+        }
+    };
+
+    function applyLanguage() {
+        const lang = localStorage.getItem('lang') || 'am';
+        const data = translations[lang];
+
+        document.getElementById('headerTitle').innerText = data.headerTitle;
+        document.getElementById('mainSub').innerText = data.mainSub;
+        document.getElementById('backBtn').innerText = data.back;
+        document.getElementById('articleBody').innerHTML = data.content;
+        
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.getAttribute('data-key');
+            if (data[key]) el.innerText = data[key];
+        });
+        document.querySelectorAll('[data-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-placeholder');
+            if (data[key]) el.placeholder = data[key];
+        });
+    }
+
+    function changeLang(lang) {
+        localStorage.setItem('lang', lang);
+        applyLanguage();
+        toggleLogoMenu();
+    }
+
+    function toggleLogoMenu() { document.getElementById('logoMenu').classList.toggle('show'); }
+    
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    }
+
+    function showUserData() {
+        const savedName = localStorage.getItem('finSmartName');
+        const savedEmail = localStorage.getItem('finSmartEmail');
+        const contentDiv = document.getElementById('userDataContent');
+        const actionDiv = document.getElementById('dynamicActionBtn');
+        const lang = localStorage.getItem('lang') || 'am';
+        const langData = translations[lang];
+
+        toggleLogoMenu();
+
+        if (savedName && savedEmail) {
+            contentDiv.innerHTML = `<p><strong>${langData.reg_name_ph}:</strong> ${savedName}</p><p><strong>${langData.reg_email_ph}:</strong> ${savedEmail}</p>`;
+            actionDiv.innerHTML = `<button onclick="clearAllData()" class="calc-btn" style="background:#d9534f; margin-top:10px;">${langData.btn_clear}</button>`;
+            document.getElementById('userDataModal').style.display = 'block';
+        } else {
+            document.getElementById('regModal').style.display = 'block';
+        }
+    }
+
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+    function clearAllData() {
+        const lang = localStorage.getItem('lang') || 'am';
+        const msg = lang === 'am' ? "Ջնջե՞լ տվյալները:" : (lang === 'ru' ? "Удалить данные?" : "Delete data?");
+        if(confirm(msg)) {
+            localStorage.removeItem('finSmartName');
+            localStorage.removeItem('finSmartEmail');
+            location.reload();
+        }
+    }
+
+    document.getElementById('regForm').onsubmit = function(e) {
+        e.preventDefault();
+        localStorage.setItem('finSmartName', document.getElementById('userName').value);
+        localStorage.setItem('finSmartEmail', document.getElementById('userEmail').value);
+        closeModal('regModal');
+        alert("Գրանցումը հաջողվեց / Registration Successful");
+    };
+
+    window.onclick = function(e) {
+        if (!e.target.closest('.logo-container') && !e.target.closest('.modal-content') && !e.target.closest('.settings-menu')) {
+            document.getElementById('logoMenu').classList.remove('show');
+        }
+    };
+
+    window.onload = function() {
+        if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark-mode');
+        applyLanguage();
+    };
+</script>
+
+</body>
+</html>

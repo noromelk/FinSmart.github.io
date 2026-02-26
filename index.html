@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client="
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSmart Armenia</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    
+    <style>
+        :root { 
+            --gold: #d4af37; 
+            --dark: #1a1a1a; 
+            --bg: #f4f7f6; 
+            --text: #333; 
+            --card-bg: white;
+        }
+
+        body.dark-mode {
+            --bg: #121212;
+            --text: #e0e0e0;
+            --card-bg: #1e1e1e;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            background: var(--bg); 
+            margin: 0; 
+            color: var(--text); 
+            line-height: 1.6; 
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        header { 
+            background: var(--dark); 
+            color: white; 
+            text-align: center; 
+            padding: 60px 20px; 
+            border-bottom: 5px solid var(--gold); 
+            position: relative;
+        }
+
+        /* --- NEW MENU STYLE --- */
+        .sub-nav {
+            background: #252525;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--gold);
+        }
+        .nav-btn {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+        .nav-btn:hover { background: var(--gold); color: white; }
+
+        .achievement-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: none;
+            background: rgba(212, 175, 55, 0.15);
+            padding: 10px 15px;
+            border-radius: 50px;
+            border: 1px solid var(--gold);
+            align-items: center;
+            gap: 10px;
+            animation: bounceIn 1s ease;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            z-index: 105;
+        }
+        .achievement-badge span { color: var(--gold); font-weight: bold; font-size: 13px; }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 110;
+        }
+
+        .logo-svg { height: 65px; width: auto; }
+
+        .settings-menu {
+            display: none; position: absolute; top: 75px; left: 20px;
+            background: var(--card-bg); border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 1000;
+            width: 200px; overflow: hidden; border: 1px solid var(--gold);
+        }
+        .settings-menu.show { display: block; animation: fadeIn 0.3s ease; }
+        .settings-menu h4 { margin: 0; padding: 10px; font-size: 11px; text-transform: uppercase; color: var(--gold); background: rgba(0,0,0,0.05); text-align: left; }
+        .settings-menu button { display: block; width: 100%; padding: 12px 15px; color: var(--text); font-size: 14px; background: none; border: none; text-align: left; cursor: pointer; border-bottom: 1px solid rgba(0,0,0,0.05); transition: 0.2s; }
+        .settings-menu button:hover { background: var(--gold); color: white; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .container { max-width: 850px; margin: 30px auto; padding: 0 20px; }
+        .card { background: var(--card-bg); padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); margin-bottom: 30px; }
+
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; background: var(--card-bg); color: var(--text); }
+
+        .calc-btn { width: 100%; padding: 15px; background: var(--gold); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; margin-top: 10px; }
+        .calc-btn:hover { background: #b8962d; transform: translateY(-2px); }
+
+        .result-box { display: none; margin-top: 20px; padding: 20px; background: #fdfdfd; border-left: 5px solid var(--gold); border-radius: 8px; color: #333; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); }
+
+        .ai-badge { background: var(--gold); color: white; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; display: inline-block; }
+
+        .progress-container { width: 100%; background-color: #e0e0e0; border-radius: 10px; margin: 15px 0; height: 20px; overflow: hidden; display: none; }
+        .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--gold), #b8962d); transition: width 1s ease-in-out; text-align: center; line-height: 20px; color: white; font-size: 12px; font-weight: bold; }
+
+        .table-container { overflow-x: auto; margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9em; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
+        th { background: var(--gold); color: white; }
+        .trend-up { color: #d9534f; font-weight: bold; }
+        .trend-down { color: #2e7d32; font-weight: bold; }
+
+        .delete-btn { background: #ff4d4d; color: white; border: none; padding: 5px 10px; border-radius: 50%; cursor: pointer; font-size: 12px; transition: 0.3s; }
+        
+        .history-actions { display: flex; gap: 10px; margin-top: 15px; }
+        .clear-history-btn { flex: 1; background: #666; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 13px; display: none; }
+        .download-btn { flex: 1; background: #28a745; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 13px; display: none; }
+
+        .article-card { background: var(--card-bg); padding: 25px; border-radius: 12px; border-left: 6px solid var(--gold); margin-bottom: 20px; transition: 0.3s; cursor: pointer; text-decoration: none; display: block; color: inherit; }
+        .article-card:hover { transform: translateX(8px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+        /* MODALS */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); }
+        .modal-content { background: var(--card-bg); margin: 10% auto; padding: 35px; border-radius: 15px; max-width: 400px; text-align: center; border-top: 6px solid var(--gold); position: relative; }
+        .close-x { position: absolute; top: 15px; right: 20px; font-size: 25px; cursor: pointer; color: #999; }
+
+        footer { background: var(--dark); color: white; text-align: center; padding: 30px; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div id="achievementBadge" class="achievement-badge">
+        <span id="badgeText"></span>
+    </div>
+
+    <div class="logo-container" onclick="toggleLogoMenu()">
+        <svg class="logo-svg" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100%" height="100%" fill="rgb(26,26,26)"/>
+            <g transform="translate(80, 50)">
+              <rect x="0" y="55" width="16" height="30" rx="2" fill="white"/>
+              <rect x="25" y="40" width="16" height="45" rx="2" fill="white"/>
+              <rect x="50" y="20" width="16" height="65" rx="2" fill="white"/>
+              <rect x="75" y="0" width="16" height="85" rx="2" fill="white"/>
+              <path d="M -20 70 Q 30 110 95 65" stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <path d="M -10 85 Q 40 65 90 5" stroke="#d4af37" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <path d="M 82 12 L 95 0 L 100 18 Z" fill="#d4af37"/>
+            </g>
+            <text x="200" y="115" font-family="Arial, sans-serif" font-weight="bold" font-size="60" fill="white">Fin<tspan fill="#d4af37">Smart</tspan></text>
+            <g transform="translate(200, 150)">
+              <line x1="0" y1="-5" x2="60" y2="-5" stroke="#999" stroke-width="2"/>
+              <text x="135" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#999" letter-spacing="5">ARMENIA</text>
+              <line x1="210" y1="-5" x2="270" y2="-5" stroke="#999" stroke-width="2"/>
+            </g>
+        </svg>
+    </div>
+
+    <div id="logoMenu" class="settings-menu">
+        <h4 data-key="menu_user">Օգտատեր</h4>
+        <button onclick="showUserData()" data-key="menu_my_data">👤 ԻՄ ՏՎՅԱԼՆԵՐԸ</button>
+        <h4 data-key="menu_lang">Լեզու / Language</h4>
+        <button onclick="changeLang('am')">🇦🇲 ARMENIAN</button>
+        <button onclick="changeLang('ru')">🇷🇺 RUSSIAN</button>
+        <button onclick="changeLang('en')">🇺🇸 ENGLISH</button>
+        <h4 data-key="menu_settings">Կարգավորումներ</h4>
+        <button onclick="toggleDarkMode()" data-key="menu_night_mode">🌙 Գիշերային ռեժիմ</button>
+    </div>
+    
+    <h1 id="mainTitle">FinSmart Armenia</h1>
+    <p id="mainSub">Կառավարեք ձեր ֆինանսները խելացի տարբերակով</p>
+</header>
+
+<div class="sub-nav">
+    <button class="nav-btn" onclick="openInfoModal('aboutModal')">Մեր մասին</button>
+    <button class="nav-btn" onclick="openInfoModal('whyModal')">Ինչու՞ օգտագործել FinSmart</button>
+    <button class="nav-btn" onclick="showPersonalAchievements()">Իմ նվաճումները</button>
+</div>
+
+<div class="container">
+    <div class="card">
+        <h2 data-key="calc_title">📊 AI Ֆինանսական Օգնական</h2>
+        <label data-key="label_income">Ամսական Եկամուտ</label>
+        <input type="number" id="income" placeholder="֏ 0" data-placeholder="input_income">
+        
+        <label data-key="label_expenses">Ամսական Ծախսեր</label>
+        <input type="number" id="expenses" placeholder="֏ 0" data-placeholder="input_expenses">
+
+        <label data-key="label_goal">Խնայողության նպատակ (֏)</label>
+        <input type="number" id="goal" placeholder="֏ 0" data-placeholder="input_goal">
+        
+        <button class="calc-btn" onclick="calculateAI()" data-key="btn_calc">Վերլուծել AI-ով</button>
+        
+        <div id="result" class="result-box">
+            <span class="ai-badge">AI Insights</span>
+            <div id="res-text"></div>
+            
+            <div id="progressSection" style="margin-top: 20px; display: none;">
+                <p id="progressLabel" style="font-size: 14px; font-weight: bold; margin-bottom: 5px;"></p>
+                <div class="progress-container" id="pContainer" style="display: block;">
+                    <div class="progress-bar" id="myBar">0%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3 data-key="history_title">📈 Գործողությունների Պատմություն</h3>
+        <div class="table-container">
+            <table id="historyTable">
+                <thead>
+                    <tr>
+                        <th data-key="th_date">Ամսաթիվ</th>
+                        <th data-key="th_inc">Եկամուտ</th>
+                        <th data-key="th_exp">Ծախս</th>
+                        <th data-key="th_trend">Դինամիկա</th>
+                        <th data-key="th_action">Գործողություն</th>
+                    </tr>
+                </thead>
+                <tbody id="historyBody"></tbody>
+            </table>
+        </div>
+        <div class="history-actions">
+            <button id="downloadBtn" class="download-btn" onclick="downloadPDF()" data-key="btn_download">📄 Ներբեռնել PDF</button>
+            <button id="clearHistoryBtn" class="clear-history-btn" onclick="clearAllHistory()" data-key="btn_clear_history">🗑️ Ջնջել պատմությունը</button>
+        </div>
+    </div>
+
+    <a href="tips1.html" class="article-card">
+        <h3 data-key="tip1_title">1. Ինչպե՞ս սկսել խնայել զրոյից ➔</h3>
+        <p data-key="tip1_desc">Բացահայտեք պարզ քայլեր ձեր առաջին խնայողությունները ստեղծելու համար:</p>
+    </a>
+
+    <a href="tips2.html" class="article-card">
+        <h3 data-key="tip2_title">2. Ծախսերի օպտիմալացում ➔</h3>
+        <p data-key="tip2_desc">Ինչպես կրճատել ավելորդ ծախսերը առանց կյանքի որակը փոխելու:</p>
+    </a>
+
+    <a href="tips3.html" class="article-card">
+        <h3 data-key="tip3_title">3. Ներդրումներ Հայաստանում ➔</h3>
+        <p data-key="tip3_desc">Ինչպե՞ս ստիպել գումարին աշխատել ձեզ համար (պարտատոմսեր, ավանդներ և այլն)։</p>
+    </a>
+</div>
+
+<div id="aboutModal" class="modal">
+    <div class="modal-content">
+        <span class="close-x" onclick="closeInfoModal('aboutModal')">&times;</span>
+        <h2>Մեր մասին</h2>
+        <p>FinSmart-ը ձեր թվային ֆինանսական ուղեցույցն է Հայաստանում: Մեր նպատակն է սովորեցնել մարդկանց ճիշտ կառավարել իրենց բյուջեն, օգտագործելով արհեստական բանականության հնարավորությունները:</p>
+    </div>
+</div>
+
+<div id="whyModal" class="modal">
+    <div class="modal-content">
+        <span class="close-x" onclick="closeInfoModal('whyModal')">&times;</span>
+        <h2>Ինչու՞ օգտագործել FinSmart</h2>
+        <ul style="text-align: left; display: inline-block;">
+            <li>✅ Անհատական AI խորհրդատվություն</li>
+            <li>✅ Պարզ և հասանելի հաշվարկներ</li>
+            <li>✅ Տվյալների լիակատար գաղտնիություն</li>
+            <li>✅ Նպատակների իրագործման հետևում</li>
+        </ul>
+    </div>
+</div>
+
+<div id="achievementsModal" class="modal">
+    <div class="modal-content">
+        <span class="close-x" onclick="closeInfoModal('achievementsModal')">&times;</span>
+        <h2>Իմ նվաճումները</h2>
+        <div id="achievementsList"></div>
+    </div>
+</div>
+
+<div id="congratsModal" class="modal">
+    <div class="modal-content" style="border-top: 6px solid #28a745;">
+        <h2 style="font-size: 50px;">🎉</h2>
+        <h3 id="congratsTitle">Level Up!</h3>
+        <p id="congratsText"></p>
+        <button class="calc-btn" onclick="closeCongrats()">OK</button>
+    </div>
+</div>
+
+<div id="regModal" class="modal">
+    <div class="modal-content">
+        <h3 data-key="reg_title">📥 Գրանցում</h3>
+        <form id="regForm">
+            <input type="text" id="userName" placeholder="Անուն" data-placeholder="reg_name_ph" required>
+            <input type="email" id="userEmail" placeholder="Էլ. հասցե" data-placeholder="reg_email_ph" required>
+            <button type="submit" class="calc-btn" data-key="btn_save">Պահպանել</button>
+        </form>
+        <button onclick="closeModal()" style="background:none; color:gray; margin-top:15px; border:none; cursor:pointer;" data-key="btn_close">Փակել</button>
+    </div>
+</div>
+
+<div id="userDataModal" class="modal">
+    <div class="modal-content">
+        <h3 data-key="my_data_title">👤 Իմ Տվյալները</h3>
+        <div id="userDataContent" style="background: rgba(0,0,0,0.05); padding:15px; border-radius:8px; margin:15px 0; text-align:left;"></div>
+        <button onclick="closeUserDataModal()" class="calc-btn" data-key="btn_ok">Լավ</button>
+        <div id="dynamicActionBtn"></div>
+    </div>
+</div>
+
+<footer>&copy; 2026 FinSmart Armenia | <a href="privacy.html" style="color:var(--gold)" data-key="privacy">Գաղտնիություն</a></footer>
+
+<script>
+    // --- ALL OLD LOGIC KEPT ---
+    const translations = {
+        am: {
+            main_sub: "Կառավարեք ձեր ֆինանսները խելացի տարբերակով",
+            menu_user: "Օգտատեր", menu_my_data: "👤 ԻՄ ՏՎՅԱԼՆԵՐԸ", menu_lang: "Լեզու / Language", menu_settings: "Կարգավորումներ", menu_night_mode: "🌙 Գիշերային ռեժիմ",
+            calc_title: "📊 AI Ֆինանսական Օգնական", label_income: "Ամսական Եկամուտ (֏)", label_expenses: "Ամսական Ծախսեր (֏)", label_goal: "Խնայողության նպատակ (֏)",
+            btn_calc: "Վերլուծել AI-ով", history_title: "📈 Գործողությունների Պատմություն", th_date: "Ամսաթիվ", th_inc: "Եկամուտ", th_exp: "Ծախս", th_trend: "Դինամիկա", th_action: "Գործողություն",
+            btn_clear_history: "🗑️ Ջնջել պատմությունը", btn_download: "📄 Ներբեռնել PDF",
+            tip1_title: "1. Ինչպե՞ս սկսել խնայել զրոյից ➔", tip1_desc: "Բացահայտեք պարզ քայլեր ձեր առաջին խնայողությունները ստեղծելու համար:",
+            tip2_title: "2. Ծախսերի օպտիմալացում ➔", tip2_desc: "Ինչպես կրճատել ավելորդ ծախսերը առանց կյանքի որակը փոխելու:",
+            tip3_title: "3. Ներդրումներ Հայաստանում ➔", tip3_desc: "Ինչպե՞ս ստիպել գումարին աշխատել ձեզ համար:",
+            reg_title: "📥 Գրանցում", reg_name_ph: "Անուն", reg_email_ph: "Էլ. հասցե", btn_save: "Պահպանել", btn_close: "Փակել", my_data_title: "👤 Իմ Տվյալները", btn_ok: "Լավ", privacy: "Գաղտնիություն",
+            free_money: "Ազատ գումար", trend_up: "↑ աճ", trend_down: "↓ նվազում", no_reg: "Դուք դեռ գրանցված չեք:", btn_clear: "Ջնջել օգտատիրոջը", btn_reg_now: "Գրանցվել",
+            goal_reached: "Դուք կհասնեք ձեր նպատակին", months: "ամսից", confirm_clear: "Համոզվա՞ծ եք, որ ուզում եք ջնջել ամբողջ պատմությունը:", progress_label: "Նպատակի իրագործում",
+            levels: ["Սկսնակ 🥉", "Խնայող 🥈", "Ֆինանսական Վարպետ 🥇", "Լեգենդար Հաղթող 🏆"],
+            congrats_msg: "Շնորհավորում ենք: Դուք հասաք նպատակին և ստացաք կոչում՝ ",
+            ai_advice_good: "Լավ է: Դուք ծախսում եք եկամտի 50%-ից քիչը:", ai_advice_neutral: "Ուշադիր եղեք: Ձեր ծախսերը բարձր են:", ai_advice_bad: "Վտանգ: Ծախսերը գերազանցում են եկամուտը:",
+            report_title: "Ֆինանսական Հաշվետվություն"
+        },
+        ru: {
+            main_sub: "Управляйте финансами с умом",
+            menu_user: "Пользователь", menu_my_data: "👤 МОИ ДАННЫЕ", menu_lang: "Язык", menu_settings: "Настройки", menu_night_mode: "🌙 Ночной режим",
+            calc_title: "📊 AI Помощник", label_income: "Доход", label_expenses: "Расход", label_goal: "Цель",
+            btn_calc: "Анализ AI", history_title: "📈 История", th_date: "Дата", th_inc: "Доход", th_exp: "Расход", th_trend: "Динамика", th_action: "Действие",
+            btn_clear_history: "🗑️ Очистить", btn_download: "📄 Скачать PDF", tip1_title: "1. Как начать копить ➔", tip1_desc: "Простые шаги для сбережений.",
+            tip2_title: "2. Оптимизация ➔", tip2_desc: "Как сократить траты.",
+            tip3_title: "3. Инвестиции ➔", tip3_desc: "Как заставить деньги работать.",
+            reg_title: "📥 Регистрация", btn_save: "Сохранить", btn_close: "Закрыть", my_data_title: "👤 Данные", btn_ok: "Ок", privacy: "Конфиденциальность",
+            free_money: "Свободно", trend_up: "↑ рост", trend_down: "↓ вниз", no_reg: "Нет регистрации", btn_clear: "Удалить", btn_reg_now: "Регистрация",
+            goal_reached: "Цель достижима через", months: "мес.", confirm_clear: "Удалить историю?", progress_label: "Прогресс",
+            levels: ["Новичок 🥉", "Экономный 🥈", "Мастер Финансов 🥇", "Легендарный Победитель 🏆"],
+            congrats_msg: "Поздравляем! Вы получили титул: ",
+            ai_advice_good: "Отлично! Тратите меньше 50%.", ai_advice_neutral: "Внимание! Расходы высоки.", ai_advice_bad: "Опасно! Расходы выше дохода.",
+            report_title: "Финансовый Отчет"
+        },
+        en: {
+            main_sub: "Manage finances the smart way",
+            menu_user: "User", menu_my_data: "👤 MY DATA", menu_lang: "Language", menu_settings: "Settings", menu_night_mode: "🌙 Night Mode",
+            calc_title: "📊 AI Assistant", label_income: "Income", label_expenses: "Expenses", label_goal: "Goal",
+            btn_calc: "Analyze AI", history_title: "📈 History", th_date: "Date", th_inc: "Income", th_exp: "Expense", th_trend: "Trend", th_action: "Action",
+            btn_clear_history: "🗑️ Clear", btn_download: "📄 Download PDF", tip1_title: "1. How to save ➔", tip1_desc: "Steps to save money.",
+            tip2_title: "2. Optimization ➔", tip2_desc: "How to cut costs.",
+            tip3_title: "3. Investing ➔", tip3_desc: "Make money work.",
+            reg_title: "📥 Registration", btn_save: "Save", btn_close: "Close", my_data_title: "👤 My Data", btn_ok: "OK", privacy: "Privacy",
+            free_money: "Free money", trend_up: "↑ up", trend_down: "↓ down", no_reg: "No registration", btn_clear: "Delete", btn_reg_now: "Register",
+            goal_reached: "Goal reached in", months: "months", confirm_clear: "Clear history?", progress_label: "Goal Progress",
+            levels: ["Beginner 🥉", "Saver 🥈", "Finance Master 🥇", "Legendary Winner 🏆"],
+            congrats_msg: "Congrats! You earned the title: ",
+            ai_advice_good: "Great! Spending under 50%.", ai_advice_neutral: "Warning! High expenses.", ai_advice_bad: "Danger! Review budget.",
+            report_title: "Financial Report"
+        }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'am';
+
+    function changeLang(lang) {
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        applyLanguage();
+        toggleLogoMenu();
+    }
+
+    function applyLanguage() {
+        const langData = translations[currentLang];
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.getAttribute('data-key');
+            if (langData[key]) el.innerText = langData[key];
+        });
+        document.querySelectorAll('[data-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-placeholder');
+            if (langData[key]) el.placeholder = langData[key];
+        });
+        document.getElementById('mainSub').innerText = langData.main_sub;
+
+        const lvlIdx = parseInt(localStorage.getItem('finLevel')) || 0;
+        if (lvlIdx > 0) {
+            document.getElementById('achievementBadge').style.display = 'flex';
+            document.getElementById('badgeText').innerText = langData.levels[lvlIdx - 1];
+        }
+        updateTable();
+    }
+
+    function toggleLogoMenu() { document.getElementById('logoMenu').classList.toggle('show'); }
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    }
+
+    // --- NEW MODAL FUNCTIONS ---
+    function openInfoModal(id) { document.getElementById(id).style.display = 'block'; }
+    function closeInfoModal(id) { document.getElementById(id).style.display = 'none'; }
+    
+    function showPersonalAchievements() {
+        const lvlIdx = parseInt(localStorage.getItem('finLevel')) || 0;
+        const history = JSON.parse(localStorage.getItem('finHistory') || '[]');
+        const container = document.getElementById('achievementsList');
+        const langData = translations[currentLang];
+
+        if (lvlIdx === 0 && history.length === 0) {
+            container.innerHTML = `<p style="padding:20px;">Դուք դեռ չունեք նվաճումներ: Կատարեք ձեր առաջին հաշվարկը և սկսեք խնայել՝ ձեր առաջին կոչումը ստանալու համար: 💪</p>`;
+        } else {
+            const currentRank = lvlIdx > 0 ? langData.levels[lvlIdx-1] : "Դեռ չկա";
+            container.innerHTML = `
+                <div style="padding:20px;">
+                    <h1 style="font-size:60px;">🏆</h1>
+                    <h3>Ձեր կոչումը՝</h3>
+                    <h2 style="color:var(--gold);">${currentRank}</h2>
+                    <p>Գրանցված գործողություններ՝ ${history.length}</p>
+                </div>
+            `;
+        }
+        openInfoModal('achievementsModal');
+    }
+
+    function calculateAI() {
+        const inc = parseFloat(document.getElementById('income').value) || 0;
+        const exp = parseFloat(document.getElementById('expenses').value) || 0;
+        const goal = parseFloat(document.getElementById('goal').value) || 0;
+        const langData = translations[currentLang];
+
+        if (inc <= 0) return alert(currentLang === 'am' ? "Մուտքագրեք եկամուտը" : "Enter income");
+
+        const balance = inc - exp;
+        const expenseRatio = (exp / inc) * 100;
+        let aiAdvice = expenseRatio <= 50 ? langData.ai_advice_good : (expenseRatio <= 90 ? langData.ai_advice_neutral : langData.ai_advice_bad);
+
+        let goalText = "";
+        const progressSection = document.getElementById('progressSection');
+        
+        if (goal > 0 && balance > 0) {
+            const months = Math.ceil(goal / balance);
+            goalText = `<p style="margin-top:10px; color:var(--gold);">🎯 ${langData.goal_reached} <b>${months}</b> ${langData.months}:</p>`;
+            
+            const percent = Math.min(Math.round((balance / goal) * 100), 100);
+            progressSection.style.display = 'block';
+            document.getElementById('progressLabel').innerText = langData.progress_label;
+            const bar = document.getElementById('myBar');
+            bar.style.width = percent + "%";
+            bar.innerText = percent + "%";
+
+            if (balance >= goal) {
+                let currentLevel = parseInt(localStorage.getItem('finLevel')) || 0;
+                if (currentLevel < 4) {
+                    currentLevel++;
+                    localStorage.setItem('finLevel', currentLevel);
+                }
+                showCelebration(langData.levels[currentLevel - 1]);
+            }
+        } else {
+            progressSection.style.display = 'none';
+        }
+
+        document.getElementById('result').style.display = 'block';
+        document.getElementById('res-text').innerHTML = `<p><strong>${langData.free_money}:</strong> ${balance.toLocaleString()} ֏</p><p style="font-size: 14px; color: #666;">🤖 ${aiAdvice}</p>${goalText}`;
+        saveToHistory(inc, exp);
+    }
+
+    function showCelebration(lvlName) {
+        const langData = translations[currentLang];
+        document.getElementById('congratsText').innerText = langData.congrats_msg + lvlName;
+        document.getElementById('congratsModal').style.display = 'block';
+        applyLanguage(); 
+    }
+
+    function closeCongrats() { document.getElementById('congratsModal').style.display = 'none'; }
+
+    function saveToHistory(inc, exp) {
+        let history = JSON.parse(localStorage.getItem('finHistory')) || [];
+        history.push({ id: Date.now(), date: new Date().toLocaleDateString(), inc, exp });
+        localStorage.setItem('finHistory', JSON.stringify(history));
+        updateTable();
+    }
+
+    function updateTable() {
+        const history = JSON.parse(localStorage.getItem('finHistory')) || [];
+        const tbody = document.getElementById('historyBody');
+        const clearBtn = document.getElementById('clearHistoryBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const langData = translations[currentLang];
+        
+        tbody.innerHTML = '';
+        const hasData = history.length > 0;
+        clearBtn.style.display = hasData ? 'block' : 'none';
+        downloadBtn.style.display = hasData ? 'block' : 'none';
+
+        history.slice(-10).forEach((item, i) => {
+            let trend = "—";
+            const fullHistory = history; 
+            const currentIndexInFull = fullHistory.findIndex(h => h.id === item.id);
+            
+            if (currentIndexInFull > 0) {
+                const prev = fullHistory[currentIndexInFull - 1].exp;
+                trend = item.exp > prev ? `<span class="trend-up">${langData.trend_up}</span>` : (item.exp < prev ? `<span class="trend-down">${langData.trend_down}</span>` : "—");
+            }
+            tbody.innerHTML += `<tr><td>${item.date}</td><td>${item.inc.toLocaleString()}</td><td>${item.exp.toLocaleString()}</td><td>${trend}</td><td><button class="delete-btn" onclick="deleteEntry(${item.id})">✕</button></td></tr>`;
+        });
+    }
+
+    function deleteEntry(id) {
+        let history = JSON.parse(localStorage.getItem('finHistory')) || [];
+        localStorage.setItem('finHistory', JSON.stringify(history.filter(i => i.id !== id)));
+        updateTable();
+    }
+
+    function clearAllHistory() {
+        if (confirm(translations[currentLang].confirm_clear)) {
+            localStorage.removeItem('finHistory');
+            updateTable();
+        }
+    }
+
+    function downloadPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        const langData = translations[currentLang];
+        const history = JSON.parse(localStorage.getItem('finHistory')) || [];
+        const userName = localStorage.getItem('finSmartName') || "User";
+
+        doc.setFontSize(18);
+        doc.text(langData.report_title, 14, 20);
+        doc.setFontSize(12);
+        doc.text(`Name: ${userName}`, 14, 30);
+        doc.text(`Date: ${new Date().toLocaleDateString()}`, 14, 37);
+
+        const tableRows = history.map(item => [
+            item.date,
+            item.inc.toLocaleString() + " AMD",
+            item.exp.toLocaleString() + " AMD",
+            (item.inc - item.exp).toLocaleString() + " AMD"
+        ]);
+
+        doc.autoTable({
+            head: [[langData.th_date, langData.th_inc, langData.th_exp, langData.free_money]],
+            body: tableRows,
+            startY: 45,
+            theme: 'grid',
+            headStyles: { fillColor: [212, 175, 55] }
+        });
+
+        doc.save(`FinSmart_Report_${userName}.pdf`);
+    }
+
+    function showUserData() {
+        const name = localStorage.getItem('finSmartName');
+        const email = localStorage.getItem('finSmartEmail');
+        const content = document.getElementById('userDataContent');
+        const actions = document.getElementById('dynamicActionBtn');
+        const langData = translations[currentLang];
+
+        if (name) {
+            content.innerHTML = `<p><strong>${langData.reg_name_ph}:</strong> ${name}</p><p><strong>${langData.reg_email_ph}:</strong> ${email}</p>`;
+            actions.innerHTML = `<button onclick="clearAllUserData()" class="calc-btn" style="background:#d9534f;">${langData.btn_clear}</button>`;
+        } else {
+            content.innerHTML = `<p>${langData.no_reg}</p>`;
+            actions.innerHTML = `<button onclick="openRegistration()" class="calc-btn">${langData.btn_reg_now}</button>`;
+        }
+        document.getElementById('userDataModal').style.display = 'block';
+    }
+
+    function openRegistration() { closeUserDataModal(); document.getElementById('regModal').style.display = 'block'; }
+    function closeModal() { document.getElementById('regModal').style.display = 'none'; }
+    function closeUserDataModal() { document.getElementById('userDataModal').style.display = 'none'; }
+
+    function clearAllUserData() {
+        if(confirm(currentLang === 'am' ? "Ջնջե՞լ տվյալները:" : "Delete data?")) {
+            localStorage.clear();
+            location.reload();
+        }
+    }
+
+    document.getElementById('regForm').onsubmit = function(e) {
+        e.preventDefault();
+        localStorage.setItem('finSmartName', document.getElementById('userName').value);
+        localStorage.setItem('finSmartEmail', document.getElementById('userEmail').value);
+        closeModal();
+        applyLanguage();
+    };
+
+    window.onload = () => {
+        if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark-mode');
+        applyLanguage();
+    };
+</script>
+</body>
+</html>
